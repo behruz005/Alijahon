@@ -1,0 +1,271 @@
+<script src="https://unpkg.com/imask"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+<script>
+    $('#phone-mask').inputmask({
+        "mask": "+\\9\\98(99) 999-99-99"
+    });
+    $('#messages-modal').modal('show');
+</script>
+
+<!--=========================-->
+<script>
+    $(function () {
+        var availableTags = [
+
+            "Savdogarlar ustozi 1 va 2-kitoblar yana sotuvda",
+
+            "Ayol immun sino tib fermasi",
+
+            "Nabaviy tarbiya",
+
+            "POLYCARBON Qo&#x27;l Soati",
+
+            "Hublot geneve",
+
+            "Erkaklar uchun magnetli ichki kiyim",
+
+            "(Patek filip) O‘zbekiston gerbi tushirilgan soat",
+
+            "Fucda soati",
+
+            "Avtomobil uchun elektron soat",
+
+            "MUKOSHAFATUL QULUB kitobi",
+
+            "Choʻziluvchan kapron.",
+
+            "Avtomobil plastik qisimlari uchun gel",
+
+            "Nokia 6310",
+
+            "Pres uchun rolik",
+
+            "Vosmoy soch uchun balzam Camera",
+
+            "O‘zbekiston gerbi va xaritasi tushirilgan soat",
+
+            "POLIROFKA AVTOMASHINA UCHUN (sarqi karopka)",
+
+            "Universal Gadjet (2)",
+
+            "Universal Gadjet (1)",
+
+            "Bolalar uchun havoli grusha",
+
+        ];
+        $("#search-input").autocomplete({
+            source: availableTags
+        });
+        console.log(availableTags);
+    });
+</script>
+{# ================================================= #}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#id_region').change(function () {
+            var regionId = $(this).val();
+            if (regionId) {
+                $.ajax({
+                    url: '{% url "get_districts" %}',// Ajax so'rovi boradigan URL
+                    data: {
+                        'region_id': regionId
+                    },
+                    success: function (data) {
+                        $('#id_district').empty();
+                        $('#id_district').append('<option value="">Shahar yoki tuman tanlang</option>');
+                        $.each(data.cities, function (key, value) {
+                            $('#id_district').append('<option value="' + key + '">' + value + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#id_district').empty();
+                $('#id_district').append('<option value="">Shahar yoki tuman tanlang</option>');
+            }
+
+        });
+    });
+</script>
+{# ============================================================================================= #}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.wish_btn').click(function () {
+            const product_id = $(this).data('product-id');
+            var csrftoken = getCookie('csrftoken');
+            var button = $(this)
+            if (product_id) {
+                $.ajax({
+                    url: "{% url 'wishlist' %}",  // URL to'g'ri formatda bo'lishi kerak
+                    type: 'POST',
+                    data: {
+                        'product_id': product_id
+
+                    },
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader('X-CSRFToken', csrftoken)
+                    },
+                    success: function (response) {
+                        console.log(response.response);
+                        if (response.response === true) {
+
+                            button.addClass('bg-danger')
+
+                        } else {
+
+                            button.removeClass('bg-danger')
+
+                        }
+
+                    },
+                    error: function () {
+                        alert("Xatolik yuz berdi, iltimos qayta urinib ko'ring.");
+                    }
+                });
+            } else {
+                alert("Mahsulot wishlistga qo'shish uchun mavjud emas.");  // ID mavjud bo'lmaganda xabar
+            }
+        });
+    });
+</script>
+
+{#============================================================================#}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.btn_open_modal').click(function () {
+            var product_id = $(this).attr('name');
+            var salasman_price = $(this).closest('.card').find('.salasman_price strong').text();
+            $('#hidden_product').val(product_id);
+            $('#id_discount').attr('placeholder', 'Chegirma miqdori :' + salasman_price + 'gacha')
+        })
+    });
+</script>
+
+{#=========================Nusha olish=============================================#}
+
+<script>
+    $('.btn_open_modal').on('click', function () {
+        let product_id = $(this).attr('name');
+        $('#hidden_stream_id').val(product_id);
+    });
+
+    function myFunction(stream_id) {
+        var r = confirm("Siz rostdan ham oqimni o'chirmoqchimisiz?");
+        if (r == true) {
+            $.ajax({
+                type: "POST",
+                url: "stream/" + stream_id,
+                data: {
+                    'csrfmiddlewaretoken': crftoken
+                },
+                dataType: "text",
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+            console.log(stream_id);
+        } else {
+            console.log("CANCEL");
+        }
+    }
+
+    $(".card-body .copy_ref_bn").on('click', function () {
+        var copyText = $(this).parent().find('.ref_link').get(0);
+
+        copyText.select();
+        document.execCommand("copy");
+        $(this).text('Nusxa olindi');
+    });
+</script>
+{#==========================Qidiruv=======================================#}
+<script>
+    document.getElementById('search-form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Formaning oddiy yuborilishini to'xtatadi
+
+        const query = document.getElementById('search-input-market').value; // Qidiruv qiymatini oladi
+
+        fetch(this.action + '?q=' + encodeURIComponent(query), {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest', // Ajax so'rovi ekanligini bildiradi
+                'X-CSRFToken': '{{ csrf_token }}' // CSRF token
+            }
+        })
+            .then(response => response.json()) // JSON formatida javob kutadi
+            .then(data => {
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = ''; // Oldingi natijalarni tozalash
+
+                if (data.length > 0) {
+                    data.forEach(product => {
+                        const resultItem = document.createElement('div');
+                        resultItem.classList.add('result-item');
+                        resultItem.textContent = `${product.name} (Chegirma: ${product.discount})`; // Natijalarni ko'rsatish
+                        resultsDiv.appendChild(resultItem);
+                    });
+                } else {
+                    resultsDiv.innerHTML = '<p>Natijalar topilmadi.</p>'; // Natija bo'lmasa
+                }
+            })
+            .catch(error => console.error('Xato:', error));
+    });
+
+</script>
+
+{#==============================================================#}
+<script src="https://unpkg.com/imask"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+<script>
+    $('#money-mask').inputmask({
+        "mask": "9999-9999-9999-9999"
+    });
+    $('#messages-modal').modal('show');
+</script>
+
+<script src="https://unpkg.com/imask"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+<script>
+    $('#coin-mask').inputmask({
+        "mask": "9999-9999-9999-9999"
+    });
+    $('#messages-modal').modal('show');
+</script>
+
+{# ========================================================== #}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#id_region').change(function () {
+            var region_id = $(this).val();
+            console.log(region_id)
+            if (region_id) {
+                $.ajax({
+                    url: '{% url "get_districts" %}',
+                    data: {
+                        'region_id': region_id
+                    },
+                    success: function (data) {
+                        $('#id_district').empty();
+                        $('#id_district').append('<option value="">Tumanni tanlang</option>');
+                        $.each(data, function (key, value) {
+                            $('#id_district').append('<option value="' + value.id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#id_district').empty();
+                $('#id_district').append('<option value="">Tumanni tanlang</option>');
+            }
+        });
+    });
+</script>
+
+

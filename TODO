@@ -1,0 +1,17 @@
+AliJahon:
+    Auth(Login Register)                                ✅
+    Bosh Sahifa (category bo'yicha product filter)      ✅
+    Mahsulotlar (category bo'yicha product filter)      ✅
+    WishList ✅
+    models (User(phone_number , password) ✅ , Category✅ , Product✅ , Order , AdminSite(deliver_price , konkurs_image , start_at , end_at , konkurs_description) , Wishlist✅ ,Region ✅, District ✅)
+    fixtures(category , region , district) ✅
+
+    ==================================================
+
+    profile edit ✅
+    Order ✅
+    oqim ✅
+    oqim-list ✅
+    oqim bilan sotilayotgan product detailni price larini moslashtiramiz
+
+

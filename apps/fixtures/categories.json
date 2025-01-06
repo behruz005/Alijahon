@@ -1,0 +1,121 @@
+[
+  {
+    "model": "apps.Category",
+    "pk": 1,
+    "fields": {
+      "name": "Uy uchun",
+      "slug": "uy-uchun",
+      "icon": "<img width=\"94\" height=\"94\" src=\"https://img.icons8.com/3d-fluency/94/home.png\" alt=\"home\"/>"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 2,
+    "fields": {
+      "name": "Bolalar uchun",
+      "slug": "bolalar-uchun",
+      "icon": "<img width=\"94\" height=\"94\" src=\"https://img.icons8.com/external-soft-fill-juicy-fish/60/external-toys-humanitarian-soft-fill-soft-fill-juicy-fish.png\" alt=\"external-toys-humanitarian-soft-fill-soft-fill-juicy-fish\"/>"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 3,
+    "fields": {
+      "name": "Sovg'a",
+      "slug": "sovg'a",
+      "icon": "<img width=\"94\" height=\"94\" src=\"https://img.icons8.com/3d-fluency/94/wedding-gift.png\" alt=\"wedding-gift\"/>"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 4,
+    "fields": {
+      "name": "Ayollar",
+      "slug": "ayollar",
+      "icon": "<img width=\"94\" height=\"94\" src=\"https://img.icons8.com/color/48/lipstick.png\" alt=\"lipstick\"/>"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 5,
+    "fields": {
+      "name": "Davolovchi mahsulotlar",
+      "slug": "davolovchi-mahsulotlar",
+      "icon": "<img width=\"94\" height=\"94\" src=\"https://img.icons8.com/color/48/bandage.png\" alt=\"bandage\"/>"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 6,
+    "fields": {
+      "name": "Erkaklar uchun",
+      "slug": "erkakalr-uchun",
+      "icon": "<img width=\"94\" height=\"94\" src=\"https://img.icons8.com/papercut/60/businessman.png\" alt=\"businessman\"/>"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 7,
+    "fields": {
+      "name": "Fitnes",
+      "slug": "fitnes",
+      "icon": "<img width=\"94\" height=\"94\" src=\"https://img.icons8.com/arcade/64/barbell.png\" alt=\"barbell\"/>"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 8,
+    "fields": {
+      "name": "Davolovchi mazlar",
+      "slug": "davolovchi-mazlar",
+      "icon": "<img width=\"94\" height=\"94\" src=\"https://img.icons8.com/external-flaticons-flat-flat-icons/64/external-homeopathy-alternative-medicine-flaticons-flat-flat-icons.png\" alt=\"external-homeopathy-alternative-medicine-flaticons-flat-flat-icons\"/>"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 9,
+    "fields": {
+      "name": "Mashina uchun",
+      "slug": "mashina-uchun",
+      "icon": "<img width=\"94\" height=\"94\" src=\"https://img.icons8.com/external-prettycons-lineal-color-prettycons/49/external-car-car-parts-vehicles-prettycons-lineal-color-prettycons-1.png\" alt=\"external-car-car-parts-vehicles-prettycons-lineal-color-prettycons-1\"/>"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 10,
+    "fields": {
+      "name": "Kitoblar",
+      "slug": "kitoblar",
+      "icon": "<img width=\"94\" height=\"94\" src=\"https://img.icons8.com/3d-fluency/94/books.png\" alt=\"books\"/>"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 11,
+    "fields": {
+      "name": "Aqlli soatlar",
+      "slug": "Atir",
+      "icon": "<img width=\"94\" height=\"94\" src=\"https://img.icons8.com/external-smashingstocks-flat-smashing-stocks/66/external-Smart-Watch-gadgets-smashingstocks-flat-smashing-stocks.png\""
+    }
+  },
+    {
+    "model": "apps.Category",
+    "pk": 12,
+    "fields": {
+      "name": "Yangi yil maxsulotlari",
+      "slug": "yangi-yil-maxsulotlari",
+      "icon": "<img width=\"94\" height=\"94\" src=\"https://img.icons8.com/3d-fluency/94/christmas-tree.png\" alt=\"christmas-tree\"/>"
+    }
+  },
+    {
+    "model": "apps.Category",
+    "pk": 13,
+    "fields": {
+      "name": "Eliktironika",
+      "slug": "Eliktironika",
+      "icon": "<img width=\"94\" height=\"94\" src=\"https://img.icons8.com/bubbles/100/tv.png\" alt=\"tv\"/>"
+    }
+  }
+
+
+]

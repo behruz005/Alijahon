@@ -1,0 +1,150 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Operator Qabul qilish - alijahon.uz</title>
+    <link rel="stylesheet" href="{% static 'apps/bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'apps/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <style>
+        /* CSS qismlari */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+        }
+
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .card-title.text-danger {
+            font-size: 18px;
+            color: #dc3545;
+        }
+
+        .card-body ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card-body ul li {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .btn {
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin-top: 50px;
+        }
+
+        .status-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .status-container select {
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <nav class="navbar navbar-dark bg-dark text-white" style="height: 10%;">
+        <div style="margin-left: 15px;">
+            <a href="/operator/prodcut_add">Zakaz + </a>
+        </div>
+        <div>Buyurtmalar</div>
+        <h4>ID: {{ user.id }}</h4>
+        <a href="{% url 'home' %}" class="btn btn-danger btn-sm">Asosiy panel</a>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="card border-dark">
+            <div class="card-body">
+                <h2 class="card-title">{{ order.product.name }} - {{ order.discount_price|floatformat:0|intcomma }} so'm</h2>
+                <h3 class="card-title text-danger">ZAKAZ ID: #{{ order.id }}</h3>
+                <ul class="text-muted">
+                    {% if order.thread %}
+                        <li>Reklama tarqatuvchi ID: {{ order.thread.owner.id }}</li>
+                    {% endif %}
+                    <li>Client: {{ order.name }} - +9989XXXXXXXX</li>
+                    <li>Address: {{ order.district.region.name }} , {{ order.district.name }}</li>
+                    <li>Narxi: {{ order.all_amount|floatformat:0|intcomma }} so'm</li>
+                    <li>Soni: {{ order.quantity }}ta</li>
+                    <li>Vaqti: {{ order.created_at|date:'Y-m-d H:i:s' }}</li>
+                    <li>Yangilangan vaqti: {{ order.update_at|date:'Y-m-d H:i:s' }}</li>
+                    <li>Holati: {{ order.status }}</li>
+                </ul>
+                
+                <!-- Status o'zgartirish formasi -->
+                <form method="post" action="/operator/accept_order/{{ order.id }}/">
+                    {% csrf_token %}
+                    <div class="status-container">
+                        <label for="status">Buyurtma holatini o'zgartiring:</label>
+                        <select name="status" id="status">
+                            {% for status in statuses %}
+                                <option value="{{ status }}" {% if order.status == status %} selected {% endif %}>{{ status|capfirst }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Holatni o'zgartirish</button>
+                    <a href="/operator/orders" class="btn btn-secondary">Bekor qilish</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
