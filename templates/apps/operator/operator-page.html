@@ -185,7 +185,7 @@
 
             if (regionId && regionId !== "Viloyatni tanlang") {
                 $.ajax({
-                    url: '{% url "get_district" %}',
+                    url: '{% url "get_districts" %}',
                     data: {
                         'region_id': regionId
                     },

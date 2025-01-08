@@ -341,7 +341,7 @@
             var regionId = $(this).val();
             if (regionId) {
                 $.ajax({
-                    url: '{% url "get_district" %}',// Ajax so'rovi boradigan URL
+                    url: '{% url "get_districts" %}',// Ajax so'rovi boradigan URL
                     data: {
                         'region_id': regionId
                     },

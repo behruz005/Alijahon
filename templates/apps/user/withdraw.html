@@ -13,8 +13,7 @@
                                 <h5>Mening hisobim</h5>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Asosiy
-                                    balansda: {{ request.user.balance|floatformat:0|intcomma }} so'm</h5>
+                                <h5 class="card-title">Asosiy balansda: {{ request.user.balance|floatformat:0|intcomma }} so'm</h5>
                                 <h5 class="card-title">To'lab berildi:{% if completed_pay %}{{ completed_pay|floatformat:0|intcomma }} 
                                 {% else %} 0 {% endif %}
                                     so'm</h5>
@@ -23,7 +22,7 @@
                         <div>
                             {% for message in messages %}
                                 {% if message.tags %}
-                                    <h6 class="{{ message.tage }} bg-danger">{{ message }}</h6>
+                                    <h6 class="{{ message.tags }} bg-danger">{{ message }}</h6>
                                 {% endif %}
                             {% endfor %}
                         </div>
@@ -60,20 +59,9 @@
 
                                         <div class="form-group">
                                             Amount <input type="number" name="amount" class="form-control"
-                                                          placeholder="Miqdorini kiriting" required="" id="id_amount">
+                                                          placeholder="Miqdorini kiriting" required="" id="money-amount">
                                         </div>
                                         <input type="text" name="type" value="money" hidden="hidden">
-
-
-                                        <div class="form-group">
-                                            <select name="type" class="form-control class-type" style="display: none;"
-                                                    id="id_type">
-                                                <option value="money">Pul</option>
-
-                                                <option value="coin">Tanga</option>
-
-                                            </select>
-                                        </div>
 
                                         <input type="submit" value="Tasdiqlash" class="btn btn-primary">
                                     </form>
@@ -89,7 +77,7 @@
 
                                         <div class="form-group">
                                             Amount <input type="number" name="amount" class="form-control"
-                                                          placeholder="Miqdorini kiriting" required="" id="id_amount">
+                                                          placeholder="Miqdorini kiriting" required="" id="coin-amount">
                                         </div>
 
                                         <input type="text" name="type" value="coin" hidden="hidden">
@@ -118,34 +106,30 @@
                             <th scope="col">Image</th>
                         </tr>
                         </thead>
-                        {% for withdraw in withdraws %}
-                            <tr>
-                                <td>{{ withdraw.create_at|date:"Y-m-d H:i:s" }}</td>
-                                <td>{{ withdraw.cart_number }}</td>
-                                <td>{{ withdraw.amount }}</td>
-                                <td>{{ withdraw.status }}</td>
-                                {% if withdraw.message %}
-                                    <td>{{ withdraw.message }}</td>
-                                    {% else %}
-                                    <td>{{ "" }}</td>
-                                {% endif %}
-                                <td>{{ withdraw.type }}</td>
-                                {% if withdraw.image %}
-                                    <td><a href="{{ withdraw.image.url }}"><img src="{{ withdraw.image.url }}" alt=""
-                                                                                style="width: 50px ; height: 50px"></a>
-                                    </td>
-                                {% endif %}
-                            </tr>
-                        {% endfor %}
-
-
-
                         <tbody>
-                        <tr class="text-center">
-                            {% if not withdraws %}
-                                <th colspan="5"> Hozircha sizda pul yechish sorovlari mavjud emas</th>
-                            {% endif %}
-                        </tr>
+                        {% if not withdraws %}
+                            <tr class="text-center">
+                                <th colspan="7"> Hozircha sizda pul yechish sorovlari mavjud emas</th>
+                            </tr>
+                        {% else %}
+                            {% for withdraw in withdraws %}
+                                <tr>
+                                    <td>{{ withdraw.create_at|date:"Y-m-d H:i:s" }}</td>
+                                    <td>{{ withdraw.cart_number }}</td>
+                                    <td>{{ withdraw.amount }}</td>
+                                    <td>{{ withdraw.status }}</td>
+                                    <td>{{ withdraw.message|default:"" }}</td>
+                                    <td>{{ withdraw.type }}</td>
+                                    <td>
+                                        {% if withdraw.image %}
+                                            <a href="{{ withdraw.image.url }}">
+                                                <img src="{{ withdraw.image.url }}" alt="" style="width: 50px; height: 50px">
+                                            </a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
                         </tbody>
                     </table>
                 </div>
